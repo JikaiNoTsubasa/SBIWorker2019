@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<tasklist>
+    <task id="0">
+        <content>Content</content>
+        <desc>Short desc</desc>
+        <name>Task1</name>
+    </task>
+    <task id="0">
+        <content>Content2</content>
+        <desc>Short desc2</desc>
+        <name>Task12</name>
+    </task>
+</tasklist>
