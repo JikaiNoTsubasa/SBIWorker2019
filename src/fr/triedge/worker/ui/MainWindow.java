@@ -17,8 +17,8 @@ public class MainWindow {
 	private Scene scene;
 	private BorderPane root;
 	private TabPane tabPane;
-	private MenuItem itemExit, itemOpenHtml, itemNewHtml, itemStorageLocation, itemOpenTaskManager, itemNewNote, itemOpenNote, itemOpenCanvas;
-	private Menu menuFile, menuHtml, menuNote, menuTaskManager, menuCanvas, menuRecentNote;
+	private MenuItem itemExit, itemStorageLocation, itemOpenTaskManager, itemNewNote, itemOpenNote;
+	private Menu menuFile, menuNote, menuTaskManager, menuRecentNote;
 	private MenuBar menuBar;
 	
 	public MainWindow(Stage stage, String title, double width, double height, String theme, String icon) {
@@ -42,22 +42,15 @@ public class MainWindow {
         // Menubar
         setMenuBar(new MenuBar());
         setMenuFile(new Menu("File"));
-        setMenuHtml(new Menu("Editor"));
         setMenuNote(new Menu("Notes"));
         setMenuTaskManager(new Menu("Task Manager"));
-        setMenuCanvas(new Menu("Canvas"));
         setMenuRecentNote(new Menu("Recent notes"));
         
         setItemExit(new MenuItem("Exit"));
-        setItemNewHtml(new MenuItem("New file"));
         setItemNewNote(new MenuItem("New note"));
-        setItemOpenHtml(new MenuItem("Open file..."));
         setItemOpenNote(new MenuItem("Open note..."));
         setItemOpenTaskManager(new MenuItem("View tasks"));
         setItemStorageLocation(new MenuItem("Change Workspace"));
-        
-        getMenuHtml().getItems().add(itemNewHtml);
-        getMenuHtml().getItems().add(itemOpenHtml);
         
         getMenuFile().getItems().add(itemStorageLocation);
         getMenuFile().getItems().add(new SeparatorMenuItem());
@@ -67,7 +60,6 @@ public class MainWindow {
         getMenuNote().getItems().add(getMenuRecentNote());
         getMenuTaskManager().getItems().add(itemOpenTaskManager);
         getMenuBar().getMenus().add(menuFile);
-        getMenuBar().getMenus().add(menuHtml);
         getMenuBar().getMenus().add(menuNote);
         getMenuBar().getMenus().add(menuTaskManager);
         
@@ -153,30 +145,6 @@ public class MainWindow {
 		this.menuTaskManager = menuTaskManager;
 	}
 
-	public Menu getMenuHtml() {
-		return menuHtml;
-	}
-
-	public void setMenuHtml(Menu menuHtml) {
-		this.menuHtml = menuHtml;
-	}
-
-	public MenuItem getItemOpenHtml() {
-		return itemOpenHtml;
-	}
-
-	public void setItemOpenHtml(MenuItem itemOpenHtml) {
-		this.itemOpenHtml = itemOpenHtml;
-	}
-
-	public MenuItem getItemNewHtml() {
-		return itemNewHtml;
-	}
-
-	public void setItemNewHtml(MenuItem itemNewHtml) {
-		this.itemNewHtml = itemNewHtml;
-	}
-
 	public MenuItem getItemNewNote() {
 		return itemNewNote;
 	}
@@ -199,22 +167,6 @@ public class MainWindow {
 
 	public void setMenuNote(Menu menuNote) {
 		this.menuNote = menuNote;
-	}
-
-	public Menu getMenuCanvas() {
-		return menuCanvas;
-	}
-
-	public void setMenuCanvas(Menu menuCanvas) {
-		this.menuCanvas = menuCanvas;
-	}
-
-	public MenuItem getItemOpenCanvas() {
-		return itemOpenCanvas;
-	}
-
-	public void setItemOpenCanvas(MenuItem itemOpenCanvas) {
-		this.itemOpenCanvas = itemOpenCanvas;
 	}
 
 	public Menu getMenuRecentNote() {

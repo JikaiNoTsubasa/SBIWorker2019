@@ -16,7 +16,6 @@ import fr.triedge.worker.model.RecentNote;
 import fr.triedge.worker.model.RecentNoteList;
 import fr.triedge.worker.model.Task;
 import fr.triedge.worker.model.TaskList;
-import fr.triedge.worker.ui.Editor;
 import fr.triedge.worker.ui.MainWindow;
 import fr.triedge.worker.ui.Note;
 import fr.triedge.worker.ui.TaskManager;
@@ -40,6 +39,9 @@ public class Controller extends Application{
 	
 	private MainWindow mainWindow;
 	private Model model;
+	
+	//FIXME - Add web browser and auto open urls from notes (right click)
+	//FIXME - Task manager
 	
 	/**
 	 * Initial loads
@@ -92,8 +94,6 @@ public class Controller extends Application{
 		
 		// Create window actions
 		getMainWindow().getItemExit().setOnAction(e -> actionExit(e));
-		getMainWindow().getItemOpenHtml().setOnAction(e -> actionOpenHtml(e));
-		getMainWindow().getItemNewHtml().setOnAction(e -> actionNewHtml(e));
 		getMainWindow().getItemOpenNote().setOnAction(e -> actionOpenNote(e));
 		getMainWindow().getItemNewNote().setOnAction(e -> actionNewNote(e));
 		getMainWindow().getItemStorageLocation().setOnAction(e -> actionChangeStorage(e));
@@ -129,6 +129,7 @@ public class Controller extends Application{
 	private void actionNewNote(ActionEvent e) {
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		String name = Utils.dialogText("File Name", "Enter file name");
+		name = name.replaceAll(" ", "_");
 		if (name == null)
 			return;
 		File file = new File(STORAGE+File.separator+format.format(new Date())+"_"+ name);
@@ -176,34 +177,6 @@ public class Controller extends Application{
 		
 		// Register to recent
 		registerRecentNote(note);
-	}
-
-	private void actionNewHtml(ActionEvent e) {
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-		String name = Utils.dialogText("File Name", "Enter file name");
-		if (name == null)
-			return;
-		File file = new File(STORAGE+File.separator+format.format(new Date())+"_"+ name);
-		FileWriter w;
-		try {
-			w = new FileWriter(file);
-			w.write("");
-			w.flush();
-			w.close();
-		} catch (IOException e1) {
-			Utils.error("Error file", "Cannot create file", e1);
-		}
-		
-		Editor ed = new Editor(file);
-		openTab(file.getName(), ed);
-	}
-
-	private void actionOpenHtml(ActionEvent e) {
-		File file = UI.openFile(getMainWindow().getStage(), STORAGE);
-		if (file == null)
-			return;
-		Editor ed = new Editor(file);
-		openTab(file.getName(), ed);
 	}
 
 	private void actionExit(ActionEvent e) {

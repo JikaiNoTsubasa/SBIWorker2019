@@ -2,14 +2,10 @@ package fr.triedge.worker.test;
 
 import java.io.File;
 
-import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
 
 import fr.triedge.worker.model.RecentNote;
 import fr.triedge.worker.model.RecentNoteList;
-import fr.triedge.worker.model.Task;
-import fr.triedge.worker.model.TaskList;
 import fr.triedge.worker.utils.Utils;
 
 public class TestXML {

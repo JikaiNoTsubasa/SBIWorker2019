@@ -69,6 +69,7 @@ public class TaskManager {
 		stage.show();
 	}
 	
+	@SuppressWarnings("unchecked")
 	private void buildTable() {
 		tableTask = new TableView<>();
 		
