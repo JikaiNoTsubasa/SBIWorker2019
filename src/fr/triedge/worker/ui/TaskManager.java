@@ -3,6 +3,7 @@ package fr.triedge.worker.ui;
 import fr.triedge.worker.controller.Controller;
 import fr.triedge.worker.model.Task;
 import fr.triedge.worker.model.TaskList;
+import fr.triedge.worker.utils.Utils;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Button;
@@ -18,7 +19,7 @@ public class TaskManager extends BorderPane{
 
 	private TableView<Task> tableTask;
 	private ToolBar toolbar;
-	private Button btnNew, btnOpen, btnDelete, btnEdit;
+	private Button btnNew, btnDelete, btnEdit;
 	private Controller controller;
 	
 	public TaskManager(Controller controller) {
@@ -29,16 +30,13 @@ public class TaskManager extends BorderPane{
 	private void buildUI() {
 		setToolbar(new ToolBar());
 		setBtnNew(new Button());
-		setBtnOpen(new Button());
 		setBtnDelete(new Button());
 		setBtnEdit(new Button());
 		getBtnNew().setGraphic(new ImageView(getClass().getResource("/icons8-plus-math-16.png").toExternalForm()));
-		getBtnOpen().setGraphic(new ImageView(getClass().getResource("/icons8-opened-folder-16.png").toExternalForm()));
 		getBtnEdit().setGraphic(new ImageView(getClass().getResource("/icons8-pencil-16.png").toExternalForm()));
 		getBtnDelete().setGraphic(new ImageView(getClass().getResource("/icons8-close-window-16_red.png").toExternalForm()));
 		getBtnNew().setTooltip(new Tooltip("New Task"));
 		getBtnEdit().setTooltip(new Tooltip("Edit Task"));
-		getBtnOpen().setTooltip(new Tooltip("Open Task"));
 		getBtnDelete().setTooltip(new Tooltip("Delete Task"));
 		getBtnNew().setOnAction(e -> {
 			getController().actionNewTask(e);
@@ -49,9 +47,17 @@ public class TaskManager extends BorderPane{
 			getController().actionEditTask(e, getTableTask().getSelectionModel().getSelectedItem());
 			getTableTask().refresh();
 		});
+		getBtnDelete().setOnAction(e -> {
+			Task t = getTableTask().getSelectionModel().getSelectedItem();
+			boolean yes = Utils.dialogYesCancel("Are you sure you want to delete "+t.getName()+"?");
+			if (yes) {
+				getController().deleteTask(t);
+				populateTable(getController().getModel().getTaskList());
+				getTableTask().refresh();
+			}
+		});
 		getToolbar().getItems().add(getBtnNew());
 		getToolbar().getItems().add(getBtnEdit());
-		getToolbar().getItems().add(getBtnOpen());
 		getToolbar().getItems().add(getBtnDelete());
 		
 		buildTable();
@@ -108,14 +114,6 @@ public class TaskManager extends BorderPane{
 
 	public void setBtnDelete(Button btnDelete) {
 		this.btnDelete = btnDelete;
-	}
-
-	public Button getBtnOpen() {
-		return btnOpen;
-	}
-
-	public void setBtnOpen(Button btnOpen) {
-		this.btnOpen = btnOpen;
 	}
 
 	public Button getBtnNew() {

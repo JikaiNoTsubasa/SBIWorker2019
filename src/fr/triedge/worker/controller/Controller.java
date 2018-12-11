@@ -265,5 +265,11 @@ public class Controller extends Application{
 	public void actionEditTask(ActionEvent e, Task task) {
 		TaskWizard wiz = new TaskWizard("New Task", task, getMainWindow().getStage());
 		wiz.show();
+		saveTasks();
+	}
+
+	public void deleteTask(Task t) {
+		getModel().getTaskList().getTasks().remove(t);
+		saveTasks();
 	}
 }

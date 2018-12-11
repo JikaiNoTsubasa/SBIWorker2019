@@ -5,6 +5,7 @@ import fr.triedge.worker.utils.Utils;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
@@ -22,6 +23,7 @@ public class TaskWizard {
 	private Task task;
 	private TextField fieldName, fieldId, fieldDesc;
 	private HTMLEditor fieldContent;
+	private Slider fieldProgress;
 	
 	public TaskWizard(String title, Task task, Stage parent) {
 		setStage(new Stage());
@@ -40,29 +42,34 @@ public class TaskWizard {
 		Label labName = new Label("Name");
 		Label labContent = new Label("Content");
 		Label labDesc = new Label("Description");
+		Label labProgress = new Label("Progress");
 		
 		setFieldId(new TextField());
 		setFieldName(new TextField());
 		setFieldContent(new HTMLEditor());
 		setFieldDesc(new TextField());
+		setFieldProgress(new Slider(0, 100, 0));
 		//getFieldContent().setMaxWidth(400);
 		//getFieldContent().setMaxHeight(400);
 		
 		if (task != null) {
 			getFieldId().setText(task.getId()+"");
 			getFieldName().setText(task.getName());
-			getFieldContent().setHtmlText(task.getDesc());
+			getFieldContent().setHtmlText(task.getContent());
 			getFieldDesc().setText(task.getDesc());
+			getFieldProgress().setValue(task.getProgress());
 		}
 		
 		grid.add(labID, 0, 0);
 		grid.add(labName, 0, 1);
-		grid.add(labContent, 0, 2);
-		grid.add(labDesc, 0, 3);
+		grid.add(labProgress, 0, 2);
+		grid.add(labContent, 0, 3);
+		grid.add(labDesc, 0, 4);
 		grid.add(getFieldId(), 1, 0);
 		grid.add(getFieldName(), 1, 1);
-		grid.add(getFieldContent(), 1, 2);
-		grid.add(getFieldDesc(), 1, 3);
+		grid.add(getFieldProgress(), 1, 2);
+		grid.add(getFieldContent(), 1, 3);
+		grid.add(getFieldDesc(), 1, 4);
 		grid.setVgap(10);
 		grid.setHgap(10);
 		
@@ -87,6 +94,8 @@ public class TaskWizard {
 		getTask().setId(Integer.parseInt(getFieldId().getText()));
 		getTask().setName(getFieldName().getText());
 		getTask().setContent(getFieldContent().getHtmlText());
+		getTask().setDesc(getFieldDesc().getText());
+		getTask().setProgress(Utils.trimDouble(getFieldProgress().getValue()));
 		stage.close();
 	}
 
@@ -156,5 +165,13 @@ public class TaskWizard {
 
 	public void setFieldDesc(TextField fieldDesc) {
 		this.fieldDesc = fieldDesc;
+	}
+
+	public Slider getFieldProgress() {
+		return fieldProgress;
+	}
+
+	public void setFieldProgress(Slider fieldProgress) {
+		this.fieldProgress = fieldProgress;
 	}
 }

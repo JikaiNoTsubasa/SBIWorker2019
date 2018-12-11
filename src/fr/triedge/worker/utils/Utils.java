@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.text.DecimalFormat;
 import java.util.Date;
 import java.util.Optional;
 import java.util.Properties;
@@ -34,6 +35,11 @@ public class Utils {
 	
 	public static StatusBar STATUS = new StatusBar();
 	public static Properties config;
+	
+	public static double trimDouble(double d) {
+		DecimalFormat df = new DecimalFormat("#.##");
+		return Double.parseDouble(df.format(d));
+	}
 	
 	public static <T> void storeXml(T el, File file) throws JAXBException {
 		JAXBContext jaxbContext = JAXBContext.newInstance(el.getClass());
@@ -98,6 +104,18 @@ public class Utils {
 		alert.setTitle("ERROR");
 		alert.setHeaderText("");
 		alert.show();
+	}
+	
+	public static boolean dialogYesCancel(String content) {
+		Alert alert = new Alert(AlertType.CONFIRMATION);
+		alert.setTitle("Confirmation");
+		alert.setHeaderText("");
+		alert.setContentText(content);
+
+		Optional<ButtonType> result = alert.showAndWait();
+		if (result.get() == ButtonType.OK)
+			return true;
+		return false;
 	}
 	
 	public static String dialogText(String title, String content) {
