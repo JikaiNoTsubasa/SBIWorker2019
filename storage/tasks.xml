@@ -4,10 +4,17 @@
         <content>Content</content>
         <desc>Short desc</desc>
         <name>Task1</name>
+        <progress>0.0</progress>
     </task>
     <task id="0">
         <content>Content2</content>
         <desc>Short desc2</desc>
         <name>Task12</name>
+        <progress>0.0</progress>
+    </task>
+    <task id="1">
+        <content>&lt;html dir="ltr"&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable="true"&gt;&lt;h1&gt;&lt;font face="Segoe UI" size="6"&gt;BIS&lt;/font&gt;&lt;/h1&gt;&lt;p&gt;&lt;font face="Segoe UI"&gt;Check certificates&lt;/font&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</content>
+        <name>BIS - Certificates</name>
+        <progress>0.0</progress>
     </task>
 </tasklist>

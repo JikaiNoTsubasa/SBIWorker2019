@@ -20,7 +20,7 @@ public class TaskWizard {
 	private Scene scene;
 	private BorderPane wizardPane;
 	private Task task;
-	private TextField fieldName, fieldId;
+	private TextField fieldName, fieldId, fieldDesc;
 	private HTMLEditor fieldContent;
 	
 	public TaskWizard(String title, Task task, Stage parent) {
@@ -28,36 +28,41 @@ public class TaskWizard {
 		setTask(task);
 		getStage().setTitle(title);
 		setWizardPane(new BorderPane());
-		setScene(new Scene(getWizardPane(), 500, 800));
+		setScene(new Scene(getWizardPane(), 900, 500));
 		getStage().setScene(getScene());
 		getStage().initOwner(parent);
 		getStage().initModality(Modality.WINDOW_MODAL);
 		wizardPane.getStylesheets().add(Utils.config.getProperty("fx.theme", "/dark-theme.css"));
-		getStage().getIcons().add(new Image(getClass().getResourceAsStream(Utils.config.getProperty("fx.icon", "/icons8-tentacles-64.png"))));
+		getStage().getIcons().add(new Image(getClass().getResourceAsStream(Utils.config.getProperty("fx.icon", "/icon_bright.png"))));
 		GridPane grid = new GridPane();
 		
 		Label labID = new Label("ID");
 		Label labName = new Label("Name");
 		Label labContent = new Label("Content");
+		Label labDesc = new Label("Description");
 		
 		setFieldId(new TextField());
 		setFieldName(new TextField());
 		setFieldContent(new HTMLEditor());
-		getFieldContent().setMaxWidth(400);
-		getFieldContent().setMaxHeight(400);
+		setFieldDesc(new TextField());
+		//getFieldContent().setMaxWidth(400);
+		//getFieldContent().setMaxHeight(400);
 		
 		if (task != null) {
 			getFieldId().setText(task.getId()+"");
 			getFieldName().setText(task.getName());
 			getFieldContent().setHtmlText(task.getDesc());
+			getFieldDesc().setText(task.getDesc());
 		}
 		
 		grid.add(labID, 0, 0);
 		grid.add(labName, 0, 1);
 		grid.add(labContent, 0, 2);
+		grid.add(labDesc, 0, 3);
 		grid.add(getFieldId(), 1, 0);
 		grid.add(getFieldName(), 1, 1);
 		grid.add(getFieldContent(), 1, 2);
+		grid.add(getFieldDesc(), 1, 3);
 		grid.setVgap(10);
 		grid.setHgap(10);
 		
@@ -143,5 +148,13 @@ public class TaskWizard {
 
 	public void setFieldContent(HTMLEditor fieldDesc) {
 		this.fieldContent = fieldDesc;
+	}
+
+	public TextField getFieldDesc() {
+		return fieldDesc;
+	}
+
+	public void setFieldDesc(TextField fieldDesc) {
+		this.fieldDesc = fieldDesc;
 	}
 }

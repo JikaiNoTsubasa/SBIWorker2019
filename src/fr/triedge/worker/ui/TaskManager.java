@@ -2,6 +2,7 @@ package fr.triedge.worker.ui;
 
 import fr.triedge.worker.controller.Controller;
 import fr.triedge.worker.model.Task;
+import fr.triedge.worker.model.TaskList;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Button;
@@ -41,6 +42,7 @@ public class TaskManager extends BorderPane{
 		getBtnDelete().setTooltip(new Tooltip("Delete Task"));
 		getBtnNew().setOnAction(e -> {
 			getController().actionNewTask(e);
+			populateTable(getController().getModel().getTaskList());
 			getTableTask().refresh();
 		});
 		getBtnEdit().setOnAction(e -> {
@@ -80,11 +82,15 @@ public class TaskManager extends BorderPane{
 		colId.setCellValueFactory(new PropertyValueFactory<>("id"));
 		colProgress.setCellValueFactory(new PropertyValueFactory<>("progress"));
 		colTitle.setCellValueFactory(new PropertyValueFactory<>("name"));
+		colTitle.prefWidthProperty().bind(tableTask.widthProperty().multiply(0.7));
 		colDesc.setCellValueFactory(new PropertyValueFactory<>("desc"));
 		
-		ObservableList<Task> list = FXCollections.observableArrayList(getController().getModel().getTaskList().getTasks());
-		
 		tableTask.getColumns().addAll(colId, colProgress, colTitle, colDesc);
+		populateTable(getController().getModel().getTaskList());
+	}
+	
+	public void populateTable(TaskList list1) {
+		ObservableList<Task> list = FXCollections.observableArrayList(list1.getTasks());
 		tableTask.setItems(list);
 	}
 

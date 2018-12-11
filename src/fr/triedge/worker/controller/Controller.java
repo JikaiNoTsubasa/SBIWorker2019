@@ -247,8 +247,19 @@ public class Controller extends Application{
 		TaskWizard wiz = new TaskWizard("New Task", null, getMainWindow().getStage());
 		wiz.show();
 		Task task = wiz.getTask();
-		if (task != null)
+		if (task != null) {
 			getModel().getTaskList().getTasks().add(task);
+			saveTasks();
+		}
+	}
+	
+	public void saveTasks() {
+		File file = new File("storage/tasks.xml");
+		try {
+			Utils.storeXml(getModel().getTaskList(), file);
+		} catch (JAXBException e) {
+			Utils.error("Cannot save tasks", e);
+		}
 	}
 	
 	public void actionEditTask(ActionEvent e, Task task) {

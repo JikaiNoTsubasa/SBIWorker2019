@@ -3,8 +3,6 @@ package fr.triedge.worker.controller;
 import java.util.ArrayList;
 
 import fr.triedge.worker.model.Task;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.geometry.Orientation;
 import javafx.scene.Scene;
 import javafx.scene.control.Menu;
@@ -84,5 +82,13 @@ public class TaskManager {
 		//ObservableList<Task> list = FXCollections.observableArrayList(user1, user2, user3)
 		
 		tableTask.getColumns().addAll(colTitle, colDesc);
+	}
+
+	public ArrayList<Task> getTasks() {
+		return tasks;
+	}
+
+	public void setTasks(ArrayList<Task> tasks) {
+		this.tasks = tasks;
 	}
 }
