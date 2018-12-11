@@ -116,4 +116,5 @@ public class Note extends BorderPane{
 	public void setBtnSave(Button btnSave) {
 		this.btnSave = btnSave;
 	}
+
 }

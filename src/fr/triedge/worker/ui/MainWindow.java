@@ -17,8 +17,8 @@ public class MainWindow {
 	private Scene scene;
 	private BorderPane root;
 	private TabPane tabPane;
-	private MenuItem itemExit, itemStorageLocation, itemOpenTaskManager, itemNewNote, itemOpenNote;
-	private Menu menuFile, menuNote, menuTaskManager, menuRecentNote;
+	private MenuItem itemExit, itemStorageLocation, itemOpenTaskManager, itemNewNote, itemOpenNote, itemBrowserNavigate;
+	private Menu menuFile, menuNote, menuTaskManager, menuRecentNote, menuBrowser;
 	private MenuBar menuBar;
 	
 	public MainWindow(Stage stage, String title, double width, double height, String theme, String icon) {
@@ -43,6 +43,7 @@ public class MainWindow {
         setMenuBar(new MenuBar());
         setMenuFile(new Menu("File"));
         setMenuNote(new Menu("Notes"));
+        setMenuBrowser(new Menu("Browser"));
         setMenuTaskManager(new Menu("Task Manager"));
         setMenuRecentNote(new Menu("Recent notes"));
         
@@ -51,6 +52,7 @@ public class MainWindow {
         setItemOpenNote(new MenuItem("Open note..."));
         setItemOpenTaskManager(new MenuItem("View tasks"));
         setItemStorageLocation(new MenuItem("Change Workspace"));
+        setItemBrowserNavigate(new MenuItem("Navigate"));
         
         getMenuFile().getItems().add(itemStorageLocation);
         getMenuFile().getItems().add(new SeparatorMenuItem());
@@ -58,10 +60,12 @@ public class MainWindow {
         getMenuNote().getItems().add(itemNewNote);
         getMenuNote().getItems().add(itemOpenNote);
         getMenuNote().getItems().add(getMenuRecentNote());
+        getMenuBrowser().getItems().add(getItemBrowserNavigate());
         getMenuTaskManager().getItems().add(itemOpenTaskManager);
         getMenuBar().getMenus().add(menuFile);
         getMenuBar().getMenus().add(menuNote);
         getMenuBar().getMenus().add(menuTaskManager);
+        getMenuBar().getMenus().add(getMenuBrowser());
         
         root.setTop(menuBar);
         root.setCenter(tabPane);
@@ -175,6 +179,22 @@ public class MainWindow {
 
 	public void setMenuRecentNote(Menu menuRecentNote) {
 		this.menuRecentNote = menuRecentNote;
+	}
+
+	public Menu getMenuBrowser() {
+		return menuBrowser;
+	}
+
+	public void setMenuBrowser(Menu menuBrowser) {
+		this.menuBrowser = menuBrowser;
+	}
+
+	public MenuItem getItemBrowserNavigate() {
+		return itemBrowserNavigate;
+	}
+
+	public void setItemBrowserNavigate(MenuItem itemBrowserNavigate) {
+		this.itemBrowserNavigate = itemBrowserNavigate;
 	}
 
 }
